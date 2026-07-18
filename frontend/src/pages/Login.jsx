@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser, signupUser } from "../firebase/authService";
 import { addUser } from "../store/userSlice";
+import { motion } from "framer-motion";
 
 function Login() {
   const [isSignup, setIsSignup] = useState(false);
@@ -38,7 +39,10 @@ function Login() {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center">
-      <form
+      <motion.form
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         onSubmit={handleSubmit}
         className="bg-gray-900 p-10 rounded-lg w-96 flex flex-col gap-4"
       >
@@ -77,13 +81,15 @@ function Login() {
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           type="submit"
           className="bg-red-600 hover:bg-red-700 text-white p-3 rounded font-semibold"
         >
-          {isSignup ? "Sign Up" : "Sign In"}
-        </button>
 
+          {isSignup ? "Sign Up" : "Sign In"}
+        </motion.button>
         <p
           className="text-gray-400 cursor-pointer text-sm"
           onClick={() => setIsSignup(!isSignup)}
@@ -92,7 +98,7 @@ function Login() {
             ? "Already have an account? Sign In"
             : "New here? Sign Up"}
         </p>
-      </form>
+      </motion.form>
     </div>
   );
 }

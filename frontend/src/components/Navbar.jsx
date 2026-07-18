@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { logoutUser } from "../firebase/authService";
 import { removeUser } from "../store/userSlice";
+import { motion } from "framer-motion";
+
 
 function Navbar() {
   const user = useSelector((store) => store.user);
@@ -21,7 +23,13 @@ function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 w-full z-20 flex justify-between items-center px-8 py-4 bg-gradient-to-b from-black/80 to-transparent">
+    <motion.div
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="fixed top-0 w-full z-20 flex justify-between items-center px-8 py-4 bg-gradient-to-b from-black/80 to-transparent"
+    >
+
       <div className="flex items-center gap-6">
         <Link to="/browse" className="text-red-600 text-2xl font-bold">
           {t("appName")}
@@ -58,7 +66,7 @@ function Navbar() {
           </>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

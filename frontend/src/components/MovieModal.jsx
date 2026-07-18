@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { addToWatchlist, removeFromWatchlist, getWatchlist } from "../firebase/watchlistService";
-
+import { motion, AnimatePresence } from "framer-motion";
 const BACKEND_URL = "http://localhost:5000";
 
 function MovieModal({ movie, onClose }) {
@@ -66,12 +66,20 @@ function MovieModal({ movie, onClose }) {
     }
   };
 
-  return (
-    <div
+return (
+  <AnimatePresence>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
         className="bg-gray-900 rounded-lg max-w-2xl w-full max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
@@ -149,8 +157,9 @@ function MovieModal({ movie, onClose }) {
             <p><span className="text-gray-500">Awards:</span> <span className="text-white">{movie.Awards}</span></p>
           </div>
         </div>
-      </div>
-    </div>
+</motion.div>
+    </motion.div>
+  </AnimatePresence>
   );
 }
 
