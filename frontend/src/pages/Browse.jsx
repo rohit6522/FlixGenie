@@ -8,6 +8,7 @@ import MovieModal from "../components/MovieModal";
 import SearchBar from "../components/SearchBar";
 import { useMovies } from "../hooks/useMovies";
 import { trendingTitles, popularTitles, topRatedTitles } from "../utils/movieLists";
+import { useTranslation } from "react-i18next";
 
 function Browse() {
   const [gptResult, setGptResult] = useState("");
@@ -17,7 +18,7 @@ function Browse() {
   const { movies: trending, loading: loading1 } = useMovies(trendingTitles);
   const { movies: popular, loading: loading2 } = useMovies(popularTitles);
   const { movies: topRated, loading: loading3 } = useMovies(topRatedTitles);
-
+  const { t } = useTranslation();
   const isLoading = loading1 || loading2 || loading3;
 
   useEffect(() => {
@@ -43,9 +44,9 @@ function Browse() {
             <GptResult result={gptResult} />
           </div>
 
-          <MovieList title="Trending Now" movies={trending} onMovieClick={setSelectedMovie} />
-          <MovieList title="Popular on FlixGenie" movies={popular} onMovieClick={setSelectedMovie} />
-          <MovieList title="Top Rated" movies={topRated} onMovieClick={setSelectedMovie} />
+          <MovieList title={t("trendingNow")} movies={trending} onMovieClick={setSelectedMovie} />
+          <MovieList title={t("popular")} movies={popular} onMovieClick={setSelectedMovie} />
+          <MovieList title={t("topRated")} movies={topRated} onMovieClick={setSelectedMovie} />
         </>
       )}
 

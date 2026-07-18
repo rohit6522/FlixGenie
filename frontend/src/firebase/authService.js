@@ -20,3 +20,8 @@ export const loginUser = async (email, password) => {
 export const logoutUser = async () => {
   await signOut(auth);
 };
+
+export const updateUserProfile = async (displayName) => {
+  await updateProfile(auth.currentUser, { displayName });
+  return auth.currentUser;
+};
