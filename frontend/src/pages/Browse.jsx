@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import MovieList from "../components/MovieList";
 import GptSearch from "../components/GptSearch";
 import GptResult from "../components/GptResult";
+import HeroBanner from "../components/HeroBanner";
+import MovieModal from "../components/MovieModal";
 import { useMovies } from "../hooks/useMovies";
 import { trendingTitles, popularTitles, topRatedTitles } from "../utils/movieLists";
 
 function Browse() {
   const [gptResult, setGptResult] = useState("");
+  const [featuredMovie, setFeaturedMovie] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const { movies: trending, loading: loading1 } = useMovies(trendingTitles);
   const { movies: popular, loading: loading2 } = useMovies(popularTitles);
@@ -15,22 +19,35 @@ function Browse() {
 
   const isLoading = loading1 || loading2 || loading3;
 
+  useEffect(() => {
+    if (trending.length > 0 && !featuredMovie) {
+      const randomIndex = Math.floor(Math.random() * trending.length);
+      setFeaturedMovie(trending[randomIndex]);
+    }
+  }, [trending, featuredMovie]);
+
   return (
-    <div className="bg-black min-h-screen pt-24 pb-10">
+    <div className="bg-black min-h-screen pb-10">
       <Navbar />
 
-      <GptSearch onResult={setGptResult} />
-      <GptResult result={gptResult} />
-
       {isLoading ? (
-        <p className="text-white text-center mt-20">Loading movies...</p>
+        <p className="text-white text-center pt-40">Loading movies...</p>
       ) : (
         <>
-          <MovieList title="Trending Now" movies={trending} />
-          <MovieList title="Popular on FlixGenie" movies={popular} />
-          <MovieList title="Top Rated" movies={topRated} />
+          <HeroBanner movie={featuredMovie} />
+
+          <div className="px-8">
+            <GptSearch onResult={setGptResult} />
+            <GptResult result={gptResult} />
+          </div>
+
+          <MovieList title="Trending Now" movies={trending} onMovieClick={setSelectedMovie} />
+          <MovieList title="Popular on FlixGenie" movies={popular} onMovieClick={setSelectedMovie} />
+          <MovieList title="Top Rated" movies={topRated} onMovieClick={setSelectedMovie} />
         </>
       )}
+
+      <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
     </div>
   );
 }

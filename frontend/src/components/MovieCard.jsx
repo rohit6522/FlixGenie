@@ -1,8 +1,11 @@
-function MovieCard({ movie }) {
+function MovieCard({ movie, onClick }) {
   if (!movie.Poster || movie.Poster === "N/A") return null;
 
   return (
-    <div className="min-w-[160px] w-40 mr-4 cursor-pointer transition-transform hover:scale-105">
+    <div
+      onClick={() => onClick(movie)}
+      className="min-w-[160px] w-40 mr-4 cursor-pointer transition-transform hover:scale-105"
+    >
       <img
         src={movie.Poster}
         alt={movie.Title}

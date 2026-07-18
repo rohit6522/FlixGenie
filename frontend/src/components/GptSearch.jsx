@@ -28,7 +28,7 @@ function GptSearch({ onResult }) {
   return (
     <form
       onSubmit={handleSearch}
-      className="flex flex-col sm:flex-row gap-3 px-8 mb-8"
+      className="flex flex-col sm:flex-row gap-3 mb-8"
     >
       <input
         type="text"
