@@ -50,8 +50,11 @@ function Browse() {
         </>
       )}
 
-      <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
-    </div>
+      <MovieModal
+        movie={selectedMovie}
+        onClose={() => setSelectedMovie(null)}
+        onSelectMovie={setSelectedMovie}
+      />    </div>
   );
 }
 

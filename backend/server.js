@@ -50,6 +50,41 @@ app.post('/api/recommend', async (req, res) => {
   }
 });
 
+// AI-powered similar movies suggestion
+app.post('/api/similar-movies', async (req, res) => {
+  try {
+    const { title, genre } = req.body;
+
+    if (!title) {
+      return res.status(400).json({ error: 'title is required' });
+    }
+
+    const completion = await openai.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
+      messages: [
+        {
+          role: 'system',
+          content:
+            'You are a movie recommendation assistant. Given a movie title and genre, respond with ONLY a JSON array of exactly 6 similar movie titles (real, well-known movies). No explanation, no markdown, just the raw JSON array. Example: ["Movie One", "Movie Two", "Movie Three", "Movie Four", "Movie Five", "Movie Six"]',
+        },
+        {
+          role: 'user',
+          content: `Suggest 6 movies similar to "${title}" (genre: ${genre || 'unknown'}). Do not include "${title}" itself in the list.`,
+        },
+      ],
+    });
+
+    const raw = completion.choices[0].message.content.trim();
+    const cleaned = raw.replace(/```json|```/g, '').trim();
+    const titles = JSON.parse(cleaned);
+
+    res.json({ titles });
+  } catch (error) {
+    console.error('Similar Movies Error:', error.message);
+    res.status(500).json({ error: 'Failed to get similar movies' });
+  }
+});
+
 // OMDb: search movies by title
 app.get('/api/omdb/search', async (req, res) => {
   try {
