@@ -1,11 +1,15 @@
-import { auth } from "./firebase/firebaseConfig";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Browse from "./pages/Browse";
 
 function App() {
-  console.log("Firebase Auth:", auth);
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <h1 className="text-4xl font-bold">🎬 FlixGenie</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/browse" element={<Browse />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

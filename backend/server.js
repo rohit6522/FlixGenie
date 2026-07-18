@@ -12,7 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.GROQ_API_KEY,
+  baseURL: "https://api.groq.com/openai/v1",
 });
 
 // Health check
@@ -30,7 +31,7 @@ app.post('/api/recommend', async (req, res) => {
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'llama-3.3-70b-versatile',
       messages: [
         {
           role: 'system',
@@ -44,24 +45,46 @@ app.post('/api/recommend', async (req, res) => {
     const reply = completion.choices[0].message.content;
     res.json({ result: reply });
   } catch (error) {
-    console.error('OpenAI Error:', error.message);
+    console.error('Groq Error:', error.message);
     res.status(500).json({ error: 'Failed to get AI recommendation' });
   }
 });
 
-// TMDB proxy endpoint (optional — keeps key server-side too)
-app.get('/api/tmdb/*splat', async (req, res) => {
+// OMDb: search movies by title
+app.get('/api/omdb/search', async (req, res) => {
   try {
-    const tmdbPath = req.params.splat.join('/');
-    const queryParams = new URLSearchParams(req.query).toString();
-    const url = `https://api.themoviedb.org/3/${tmdbPath}?api_key=${process.env.TMDB_API_KEY}&${queryParams}`;
-
+    const { title } = req.query;
+    const url = `https://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&t=${encodeURIComponent(title)}`;
     const response = await fetch(url);
     const data = await response.json();
     res.json(data);
   } catch (error) {
-    console.error('TMDB Error:', error.message);
-    res.status(500).json({ error: 'Failed to fetch TMDB data' });
+    console.error('OMDb Error:', error.message);
+    res.status(500).json({ error: 'Failed to fetch movie data' });
+  }
+});
+
+// OMDb: fetch multiple movies by a list of titles (for "Popular", "Top Rated" rows)
+app.post('/api/omdb/bulk', async (req, res) => {
+  try {
+    const { titles } = req.body;
+    if (!titles || !Array.isArray(titles)) {
+      return res.status(400).json({ error: 'titles array is required' });
+    }
+
+    const results = await Promise.all(
+      titles.map(async (title) => {
+        const url = `https://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&t=${encodeURIComponent(title)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.Response === 'True' ? data : null;
+      })
+    );
+
+    res.json({ results: results.filter(Boolean) });
+  } catch (error) {
+    console.error('OMDb Bulk Error:', error.message);
+    res.status(500).json({ error: 'Failed to fetch bulk movie data' });
   }
 });
 
