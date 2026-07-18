@@ -5,6 +5,7 @@ import GptSearch from "../components/GptSearch";
 import GptResult from "../components/GptResult";
 import HeroBanner from "../components/HeroBanner";
 import MovieModal from "../components/MovieModal";
+import SearchBar from "../components/SearchBar";
 import { useMovies } from "../hooks/useMovies";
 import { trendingTitles, popularTitles, topRatedTitles } from "../utils/movieLists";
 
@@ -37,6 +38,7 @@ function Browse() {
           <HeroBanner movie={featuredMovie} />
 
           <div className="px-8">
+            <SearchBar onSelectMovie={setSelectedMovie} />
             <GptSearch onResult={setGptResult} />
             <GptResult result={gptResult} />
           </div>

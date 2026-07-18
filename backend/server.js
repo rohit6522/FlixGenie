@@ -88,6 +88,33 @@ app.post('/api/omdb/bulk', async (req, res) => {
   }
 });
 
+
+// YouTube: search trailer by movie title
+app.get('/api/youtube/trailer', async (req, res) => {
+  try {
+    const { title } = req.query;
+    if (!title) {
+      return res.status(400).json({ error: 'title is required' });
+    }
+
+    const query = encodeURIComponent(`${title} official trailer`);
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=1&key=${process.env.YOUTUBE_API_KEY}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.items && data.items.length > 0) {
+      const videoId = data.items[0].id.videoId;
+      res.json({ videoId });
+    } else {
+      res.json({ videoId: null });
+    }
+  } catch (error) {
+    console.error('YouTube Error:', error.message);
+    res.status(500).json({ error: 'Failed to fetch trailer' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
