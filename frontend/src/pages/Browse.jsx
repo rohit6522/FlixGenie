@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar";
 import MovieList from "../components/MovieList";
 import GptSearch from "../components/GptSearch";
@@ -6,11 +7,15 @@ import GptResult from "../components/GptResult";
 import HeroBanner from "../components/HeroBanner";
 import MovieModal from "../components/MovieModal";
 import SearchBar from "../components/SearchBar";
+import SkeletonRow from "../components/SkeletonRow";
+import SkeletonHero from "../components/SkeletonHero";
 import { useMovies } from "../hooks/useMovies";
 import { trendingTitles, popularTitles, topRatedTitles } from "../utils/movieLists";
-import { useTranslation } from "react-i18next";
+import { usePublicDomainMovies } from "../hooks/usePublicDomainMovies";
+
 
 function Browse() {
+  const { t } = useTranslation();
   const [gptResult, setGptResult] = useState("");
   const [featuredMovie, setFeaturedMovie] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -18,8 +23,10 @@ function Browse() {
   const { movies: trending, loading: loading1 } = useMovies(trendingTitles);
   const { movies: popular, loading: loading2 } = useMovies(popularTitles);
   const { movies: topRated, loading: loading3 } = useMovies(topRatedTitles);
-  const { t } = useTranslation();
-  const isLoading = loading1 || loading2 || loading3;
+const { movies: freeMovies, loading: loading4 } = usePublicDomainMovies();
+
+const isLoading = loading1 || loading2 || loading3 || loading4;
+
 
   useEffect(() => {
     if (trending.length > 0 && !featuredMovie) {
@@ -33,7 +40,12 @@ function Browse() {
       <Navbar />
 
       {isLoading ? (
-        <p className="text-white text-center pt-40">Loading movies...</p>
+        <>
+          <SkeletonHero />
+          <SkeletonRow />
+          <SkeletonRow />
+          <SkeletonRow />
+        </>
       ) : (
         <>
           <HeroBanner movie={featuredMovie} />
@@ -47,6 +59,8 @@ function Browse() {
           <MovieList title={t("trendingNow")} movies={trending} onMovieClick={setSelectedMovie} />
           <MovieList title={t("popular")} movies={popular} onMovieClick={setSelectedMovie} />
           <MovieList title={t("topRated")} movies={topRated} onMovieClick={setSelectedMovie} />
+
+          <MovieList title="🎬 Free Classic Movies (Watch Now)" movies={freeMovies} onMovieClick={setSelectedMovie} />
         </>
       )}
 
@@ -54,7 +68,8 @@ function Browse() {
         movie={selectedMovie}
         onClose={() => setSelectedMovie(null)}
         onSelectMovie={setSelectedMovie}
-      />    </div>
+      />
+    </div>
   );
 }
 

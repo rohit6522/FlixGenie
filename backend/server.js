@@ -124,6 +124,40 @@ app.post('/api/omdb/bulk', async (req, res) => {
 });
 
 
+// Fetch public domain feature films directly from Archive.org (always valid, always legal)
+app.get('/api/archive/movies', async (req, res) => {
+  try {
+    const url = `https://archive.org/advancedsearch.php?q=collection%3Afeature_films+AND+mediatype%3Amovies&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=year&fl%5B%5D=description&sort%5B%5D=downloads+desc&rows=60&output=json`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const movies = (data.response?.docs || [])
+      .filter((doc) => doc.identifier && doc.title)
+      .map((doc) => ({
+        Title: doc.title,
+        Year: doc.year || "N/A",
+        Plot: doc.description
+          ? String(doc.description).slice(0, 200)
+          : "A classic public domain film, free to watch.",
+        Poster: `https://archive.org/services/img/${doc.identifier}`,
+        imdbID: doc.identifier,
+        archiveId: doc.identifier,
+        imdbRating: "N/A",
+        Runtime: "N/A",
+        Rated: "N/A",
+        Genre: "Classic",
+        Director: "N/A",
+        Actors: "N/A",
+        Awards: "N/A",
+      }));
+
+    res.json({ results: movies });
+  } catch (error) {
+    console.error('Archive.org Error:', error.message);
+    res.status(500).json({ error: 'Failed to fetch archive movies' });
+  }
+});
 // YouTube: search trailer by movie title
 app.get('/api/youtube/trailer', async (req, res) => {
   try {
