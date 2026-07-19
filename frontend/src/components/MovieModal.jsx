@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { addToWatchlist, removeFromWatchlist, getWatchlist } from "../firebase/watchlistService";
 
-const BACKEND_URL = "http://localhost:5000";
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 function MovieModal({ movie, onClose, onSelectMovie }) {
     const [trailerId, setTrailerId] = useState(null);
     const [loadingTrailer, setLoadingTrailer] = useState(false);

@@ -2,8 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
-const BACKEND_URL = "http://localhost:5000";
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 function SearchBar({ onSelectMovie }) {
     const [query, setQuery] = useState("");
     const [result, setResult] = useState(null);
