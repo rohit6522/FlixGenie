@@ -30,3 +30,37 @@ export const topRatedTitles = [
   "GoodFellas",
   "Se7en",
 ];
+
+
+export const hollywoodTitles = [
+  "Avengers: Endgame",
+  "The Dark Knight",
+  "Interstellar",
+  "Inception",
+  "Top Gun: Maverick",
+  "John Wick",
+  "Mad Max: Fury Road",
+  "Deadpool",
+];
+
+export const southMovieTitles = [
+  "Baahubali: The Beginning",
+  "RRR",
+  "KGF: Chapter 2",
+  "Pushpa: The Rise",
+  "Kantara",
+  "Vikram",
+  "Master",
+  "Arjun Reddy",
+];
+
+export const webSeriesTitles = [
+  "Breaking Bad",
+  "Stranger Things",
+  "Money Heist",
+  "The Boys",
+  "Sacred Games",
+  "Mirzapur",
+  "The Family Man",
+  "Dark",
+];
