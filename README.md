@@ -4,7 +4,7 @@
 
 🔗 **Live Demo:** [flixgenie-frontend.onrender.com](https://flixgenie-frontend.onrender.com)
 🔗 **Backend API:** [flixgenie-backend.onrender.com](https://flixgenie-backend.onrender.com)
-📦 **Repository:** [github.com/Raj-Satyam1206/FlixGenie](https://github.com/rohit6522/FlixGenie)
+📦 **Repository:** [github.com/Rohit-6522/FlixGenie](https://github.com/rohit6522/FlixGenie)
 
 > Note: The backend is hosted on Render's free tier, so the first request after inactivity may take 30–50 seconds to wake up.
 
