@@ -27,7 +27,7 @@ function SearchBar({ onSelectMovie }) {
             if (data.Response === "True") {
                 setResult(data);
             } else {
-                setError("Movie not found. Try another title.");
+               setError(`No results for "${query}". Try a different title.`);
             }
         } catch (err) {
             setError("Something went wrong. Please try again.");
