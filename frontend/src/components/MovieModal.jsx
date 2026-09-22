@@ -188,7 +188,7 @@ function MovieModal({ movie, onClose, onSelectMovie }) {
 
                         <div className="flex flex-wrap gap-3 mb-4 text-sm">
                             <span className="text-green-400 font-semibold">⭐ {movie.imdbRating}/10</span>
-                            <span className="text-gray-400">{movie.Year}</span>
+                          <span className="bg-gray-800 px-2 py-1 rounded text-xs text-gray-300">{movie.Year}</span>
                             <span className="text-gray-400">{movie.Runtime}</span>
                             <span className="text-gray-400 border border-gray-600 px-2 rounded">{movie.Rated}</span>
                         </div>
