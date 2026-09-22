@@ -99,6 +99,9 @@ function Browse() {
         </>
       )}
 
+      <footer className="text-center text-gray-500 text-xs mt-10 px-8">
+        Built with React, Firebase & Groq AI — © 2026 FlixGenie
+      </footer>
       <MovieModal
         movie={selectedMovie}
         onClose={() => setSelectedMovie(null)}
