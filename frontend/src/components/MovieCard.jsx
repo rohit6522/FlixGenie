@@ -16,6 +16,9 @@ function MovieCard({ movie, onClick }) {
         src={movie.Poster}
         alt={movie.Title}
         title={`⭐ ${movie.imdbRating || "N/A"}/10`}
+        onError={(e) => {
+          e.target.src = "https://via.placeholder.com/300x445?text=No+Poster";
+        }}
         className="rounded-lg w-full shadow-lg"
       />
       <p className="text-white text-sm mt-1 truncate">{movie.Title}</p>
