@@ -20,6 +20,7 @@ import {
   southMovieTitles,
   webSeriesTitles,
 } from "../utils/movieLists";
+import ScrollToTop from "../components/ScrollToTop";
 
 const categories = [
   { key: "hollywood", label: "🎬 Hollywood", titles: hollywoodTitles },
@@ -103,6 +104,7 @@ function Browse() {
         onClose={() => setSelectedMovie(null)}
         onSelectMovie={setSelectedMovie}
       />
+      <ScrollToTop />
     </div>
   );
 }
