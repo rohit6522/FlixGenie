@@ -31,10 +31,13 @@ function GptSearch({ onResult }) {
         >
             <input
                 type="text"
-                placeholder={t("askAiPlaceholder")} value={query}
+                placeholder={t("askAiPlaceholder")}
+                value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                maxLength={200}
                 className="flex-1 p-3 rounded bg-gray-800 text-white outline-none border border-gray-700 focus:border-red-600"
             />
+            <p className="text-gray-500 text-xs">{query.length}/200</p>
             <button
                 type="submit"
                 disabled={loading}
