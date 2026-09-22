@@ -15,6 +15,7 @@ function MovieCard({ movie, onClick }) {
       <img
         src={movie.Poster}
         alt={movie.Title}
+        title={`⭐ ${movie.imdbRating || "N/A"}/10`}
         className="rounded-lg w-full shadow-lg"
       />
       <p className="text-white text-sm mt-1 truncate">{movie.Title}</p>
