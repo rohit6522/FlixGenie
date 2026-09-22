@@ -41,7 +41,7 @@ function SearchBar({ onSelectMovie }) {
             <form onSubmit={handleSearch} className="flex gap-3 mb-4">
                 <input
                     type="text"
-                   placeholder={t("searchPlaceholder")}
+                    placeholder={t("searchPlaceholder")}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="flex-1 p-3 rounded bg-gray-800 text-white outline-none border border-gray-700 focus:border-red-600"
@@ -49,9 +49,14 @@ function SearchBar({ onSelectMovie }) {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white px-6 py-3 rounded font-semibold"
+                    className="bg-gray-700 hover:bg-gray-600 disabled:opacity-50 text-white px-6 py-3 rounded font-semibold flex items-center gap-2"
                 >
-                    {loading ? "..." : `🔍 ${t("search")}`}        </button>
+                    {loading && (
+                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                    )}
+                    {loading ? "Searching..." : "🔍 Search"}
+                </button>
+
             </form>
 
             {error && <p className="text-red-500 text-sm">{error}</p>}
