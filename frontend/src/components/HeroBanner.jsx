@@ -17,9 +17,9 @@ function HeroBanner({ movie }) {
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="absolute bottom-16 left-8 max-w-xl"
+        className="absolute bottom-16 left-4 md:left-8 right-4 md:right-auto max-w-xl"
       >
-        <h1 className="text-white text-4xl md:text-5xl font-bold mb-3">
+        <h1 className="text-white text-2xl md:text-5xl font-bold mb-3">
           {movie.Title}
         </h1>
         <p className="text-gray-300 text-sm md:text-base line-clamp-3 mb-4">
