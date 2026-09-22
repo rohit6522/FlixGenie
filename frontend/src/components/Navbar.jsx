@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { logoutUser } from "../firebase/authService";
 import { removeUser } from "../store/userSlice";
@@ -11,7 +11,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-
+  const location = useLocation();
   const handleLogout = async () => {
     await logoutUser();
     dispatch(removeUser());
@@ -36,10 +36,16 @@ function Navbar() {
         </Link>
         {user && (
           <>
-            <Link to="/watchlist" className="text-white text-sm hover:text-gray-300">
+            <Link
+              to="/watchlist"
+              className={`text-sm hover:text-gray-300 ${location.pathname === "/watchlist" ? "text-red-500 font-semibold" : "text-white"}`}
+            >
               {t("myWatchlist")}
             </Link>
-            <Link to="/profile" className="text-white text-sm hover:text-gray-300">
+            <Link
+              to="/profile"
+              className={`text-sm hover:text-gray-300 ${location.pathname === "/profile" ? "text-red-500 font-semibold" : "text-white"}`}
+            >
               {t("profile")}
             </Link>
           </>
