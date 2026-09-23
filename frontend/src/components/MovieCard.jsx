@@ -34,7 +34,7 @@ function MovieCard({ movie, onClick }) {
         )}
 
       </div>
-      <p className="text-white text-sm mt-1 truncate">{movie.Title}</p>
+      <p className="text-white text-sm mt-1 line-clamp-2 leading-snug">{movie.Title}</p>
       {movie.Genre && movie.Genre !== "N/A" && (
   <p className="text-gray-500 text-xs truncate">{movie.Genre.split(",")[0]}</p>
 )}
