@@ -12,15 +12,16 @@ function MovieCard({ movie, onClick }) {
       onClick={() => onClick(movie)}
       className="min-w-[160px] w-40 mr-4 cursor-pointer"
     >
-      <img
-        src={movie.Poster}
-        alt={movie.Title}
-        title={`⭐ ${movie.imdbRating || "N/A"}/10`}
-        onError={(e) => {
-          e.target.src = "https://via.placeholder.com/300x445?text=No+Poster";
-        }}
-        className="rounded-lg w-full shadow-lg"
-      />
+      <div className="relative aspect-[2/3] overflow-hidden rounded-lg">
+        <img
+          src={movie.Poster}
+          alt={movie.Title}
+          onError={(e) => {
+            e.target.src = "https://via.placeholder.com/300x445?text=No+Poster";
+          }}
+          className="w-full h-full object-cover"
+        />
+      </div>
       <p className="text-white text-sm mt-1 truncate">{movie.Title}</p>
     </motion.div>
   );
