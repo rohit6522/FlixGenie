@@ -22,11 +22,17 @@ function MovieCard({ movie, onClick }) {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+  <span className="bg-white/90 text-black w-10 h-10 rounded-full flex items-center justify-center text-lg shadow-lg">
+    ▶
+  </span>
+</div>
         {movie.imdbRating && movie.imdbRating !== "N/A" && (
           <span className="absolute top-2 right-2 bg-black/70 text-yellow-400 text-xs font-semibold px-2 py-1 rounded">
             ⭐ {movie.imdbRating}
           </span>
         )}
+
       </div>
       <p className="text-white text-sm mt-1 truncate">{movie.Title}</p>
     </motion.div>
