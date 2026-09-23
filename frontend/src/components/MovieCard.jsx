@@ -21,6 +21,11 @@ function MovieCard({ movie, onClick }) {
           }}
           className="w-full h-full object-cover"
         />
+        {movie.imdbRating && movie.imdbRating !== "N/A" && (
+          <span className="absolute top-2 right-2 bg-black/70 text-yellow-400 text-xs font-semibold px-2 py-1 rounded">
+            ⭐ {movie.imdbRating}
+          </span>
+        )}
       </div>
       <p className="text-white text-sm mt-1 truncate">{movie.Title}</p>
     </motion.div>
