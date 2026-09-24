@@ -38,7 +38,19 @@ function MovieCard({ movie, onClick }) {
           <span className="absolute top-2 right-2 bg-black/70 text-yellow-400 text-xs font-semibold px-2 py-1 rounded">
             ⭐ {movie.imdbRating}
           </span>
+
+
         )}
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick(movie);
+          }}
+          className="absolute top-2 left-2 bg-black/70 hover:bg-red-600 text-white w-7 h-7 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-sm"
+        >
+          +
+        </button>
 
       </div>
       <p className="text-white text-sm mt-1 line-clamp-2 leading-snug">{movie.Title}</p>
