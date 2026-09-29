@@ -39,7 +39,7 @@ function Navbar() {
     >
 
       <div className="flex items-center gap-6">
-        <Link to="/browse" className="text-red-600 text-2xl font-bold">
+        <Link to="/browse" className="text-red-600 text-3xl font-black tracking-tight italic">
           {t("appName")}
         </Link>
         {user && (
