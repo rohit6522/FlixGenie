@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { logoutUser } from "../firebase/authService";
 import { removeUser } from "../store/userSlice";
 import { motion } from "framer-motion";
-
+import { useState, useEffect } from "react";
 
 function Navbar() {
   const user = useSelector((store) => store.user);
@@ -12,6 +12,13 @@ function Navbar() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const handleLogout = async () => {
     await logoutUser();
     dispatch(removeUser());
@@ -27,7 +34,8 @@ function Navbar() {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="fixed top-0 w-full z-20 flex justify-between items-center px-8 py-4 bg-gradient-to-b from-black/80 to-transparent"
+      className={`fixed top-0 w-full z-20 flex justify-between items-center px-8 py-4 transition-colors duration-300 ${scrolled ? "bg-black" : "bg-gradient-to-b from-black/80 to-transparent"
+        }`}
     >
 
       <div className="flex items-center gap-6">
