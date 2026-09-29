@@ -18,7 +18,7 @@ function MovieList({ title, movies, onMovieClick }) {
 
   return (
     <div className="px-8 mb-8 group relative">
-      <h2 className="text-white text-xl font-semibold mb-3">{title}</h2>
+     <h2 className="text-white text-xl md:text-2xl font-bold mb-3 px-1">{title}</h2>
 
       {/* Left Arrow */}
       <button
