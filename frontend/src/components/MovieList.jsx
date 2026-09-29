@@ -38,8 +38,7 @@ function MovieList({ title, movies, onMovieClick }) {
 
       <div
         ref={scrollRef}
-        className="flex overflow-x-scroll scrollbar-hide scroll-smooth"
-      >
+        className="flex overflow-x-scroll scrollbar-hide scroll-smooth py-2">
         {movies.map((movie) => (
           <MovieCard key={movie.imdbID} movie={movie} onClick={onMovieClick} />
         ))}
