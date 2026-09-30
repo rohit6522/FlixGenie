@@ -64,3 +64,14 @@ export const webSeriesTitles = [
   "The Family Man",
   "Dark",
 ];
+
+export const bollywoodTitles = [
+  "Dangal",
+  "3 Idiots",
+  "Zindagi Na Milegi Dobara",
+  "Gully Boy",
+  "Andhadhun",
+  "Queen",
+  "Article 15",
+  "Piku",
+];
