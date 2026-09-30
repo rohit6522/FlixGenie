@@ -75,3 +75,14 @@ export const bollywoodTitles = [
   "Article 15",
   "Piku",
 ];
+
+export const horrorTitles = [
+  "The Conjuring",
+  "Hereditary",
+  "Get Out",
+  "A Quiet Place",
+  "It",
+  "The Exorcist",
+  "Sinister",
+  "Insidious",
+];
