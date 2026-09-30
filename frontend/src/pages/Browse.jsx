@@ -19,13 +19,21 @@ import {
   hollywoodTitles,
   southMovieTitles,
   webSeriesTitles,
+  bollywoodTitles,
+  horrorTitles,
+  comedyTitles,
+  animeTitles,
 } from "../utils/movieLists";
 import ScrollToTop from "../components/ScrollToTop";
 
 const categories = [
   { key: "hollywood", label: "🎬 Hollywood", titles: hollywoodTitles },
+  { key: "bollywood", label: "🎪 Bollywood", titles: bollywoodTitles },
   { key: "south", label: "🎭 South Movies", titles: southMovieTitles },
   { key: "webseries", label: "📺 Web Series", titles: webSeriesTitles },
+  { key: "horror", label: "👻 Horror", titles: horrorTitles },
+  { key: "comedy", label: "😂 Comedy", titles: comedyTitles },
+  { key: "anime", label: "🎌 Anime", titles: animeTitles },
 ];
 
 function Browse() {
