@@ -86,3 +86,13 @@ export const horrorTitles = [
   "Sinister",
   "Insidious",
 ];
+export const comedyTitles = [
+  "Superbad",
+  "The Hangover",
+  "Step Brothers",
+  "Anchorman",
+  "Dumb and Dumber",
+  "Bridesmaids",
+  "21 Jump Street",
+  "Tropic Thunder",
+];
