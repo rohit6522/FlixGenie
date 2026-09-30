@@ -96,3 +96,14 @@ export const comedyTitles = [
   "21 Jump Street",
   "Tropic Thunder",
 ];
+
+export const animeTitles = [
+  "Spirited Away",
+  "Your Name",
+  "Demon Slayer: Mugen Train",
+  "Akira",
+  "Princess Mononoke",
+  "A Silent Voice",
+  "Weathering with You",
+  "Grave of the Fireflies",
+];
