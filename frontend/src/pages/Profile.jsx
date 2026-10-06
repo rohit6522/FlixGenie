@@ -33,8 +33,8 @@ function Profile() {
     <div className="bg-black min-h-screen pt-24 pb-10 px-8">
       <Navbar />
 
-      <div className="max-w-md mx-auto bg-gray-900 rounded-lg p-8">
-        <h1 className="text-white text-2xl font-bold mb-6">My Profile</h1>
+<div className="max-w-md mx-auto bg-gray-900 border border-gray-800 rounded-lg p-8 shadow-2xl">
+          <h1 className="text-white text-2xl font-bold mb-6">My Profile</h1>
 
         <form onSubmit={handleUpdate} className="flex flex-col gap-4">
           <div>
