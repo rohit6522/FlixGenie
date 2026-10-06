@@ -72,11 +72,11 @@ function Navbar() {
               {user.displayName || user.email}
             </span>
             <button
-              onClick={handleLogout}
-              className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-sm"
-            >
-              {t("signOut")}
-            </button>
+  onClick={handleLogout}
+  className="text-white bg-gray-800 hover:bg-red-700 px-4 py-2 rounded text-sm transition-colors flex items-center gap-1"
+>
+  ⏻ {t("signOut")}
+</button>
           </>
         )}
       </div>
