@@ -138,12 +138,12 @@ function MovieModal({ movie, onClose, onSelectMovie }) {
                             />
                         )}
 
-                        <button
-                            onClick={onClose}
-                            className="absolute top-3 right-3 bg-black/70 hover:bg-black text-white w-8 h-8 rounded-full flex items-center justify-center z-10"
-                        >
-                            ✕
-                        </button>
+                      <button
+  onClick={onClose}
+  className="absolute top-3 right-3 bg-black/70 hover:bg-red-600 text-white w-9 h-9 rounded-full flex items-center justify-center z-10 transition-colors text-lg"
+>
+  ✕
+</button>
                     </div>
 
                     <div className="p-6">
