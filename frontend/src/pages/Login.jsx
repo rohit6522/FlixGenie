@@ -38,8 +38,7 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center">
-      <motion.form
+<div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-red-950 flex items-center justify-center">      <motion.form
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
