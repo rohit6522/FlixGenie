@@ -5,7 +5,7 @@ import MovieCard from "../components/MovieCard";
 import MovieModal from "../components/MovieModal";
 import SkeletonCard from "../components/SkeletonCard";
 import { getWatchlist } from "../firebase/watchlistService";
-
+import { Link } from "react-router-dom";
 function Watchlist() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,16 @@ function Watchlist() {
           ))}
         </div>
       ) : movies.length === 0 ? (
-        <p className="text-gray-400">No movies in your watchlist yet. Add some from Browse!</p>
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <span className="text-6xl mb-4">🎬</span>
+          <p className="text-gray-400 mb-4">No movies in your watchlist yet.</p>
+          <Link
+            to="/browse"
+            className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded font-semibold text-sm"
+          >
+            Browse Movies
+          </Link>
+        </div>
       ) : (
         <div className="flex flex-wrap gap-4">
           {movies.map((movie) => (
