@@ -107,8 +107,9 @@ function Browse() {
         </>
       )}
 
-      <footer className="text-center text-gray-500 text-xs mt-10 px-8">
-        Built with React, Firebase & Groq AI — © 2026 FlixGenie
+      <footer className="text-center text-gray-500 text-xs mt-10 px-8 pb-6 border-t border-gray-900 pt-6">
+        <p>Built with React, Firebase & Groq AI</p>
+        <p className="mt-1">© 2026 FlixGenie — A student project for educational purposes</p>
       </footer>
       <MovieModal
         movie={selectedMovie}
