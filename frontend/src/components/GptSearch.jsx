@@ -41,9 +41,15 @@ function GptSearch({ onResult }) {
             <button
                 type="submit"
                 disabled={loading}
-                className="bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white px-6 py-3 rounded font-semibold"
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:opacity-50 text-white px-6 py-3 rounded font-semibold flex items-center gap-2"
             >
-                {loading ? "Thinking..." : t("askAi")}      </button>
+                {loading ? (
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                ) : (
+                    <span>✨</span>
+                )}
+                {loading ? "Thinking..." : t("askAi")}
+            </button>
         </form>
     );
 }
