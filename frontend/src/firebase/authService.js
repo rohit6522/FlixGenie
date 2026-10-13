@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "./firebaseConfig";
 
@@ -24,4 +25,8 @@ export const logoutUser = async () => {
 export const updateUserProfile = async (displayName) => {
   await updateProfile(auth.currentUser, { displayName });
   return auth.currentUser;
+};
+
+export const resetPassword = async (email) => {
+  await sendPasswordResetEmail(auth, email);
 };
