@@ -205,6 +205,56 @@ app.get('/api/youtube/trailer', async (req, res) => {
   }
 });
 
+// ---------- Navbar search: suggestions ----------
+const findCache = new Map();
+
+app.get('/api/omdb/find', async (req, res) => {
+  try {
+    const q = String(req.query.q || '').trim();
+    if (q.length < 2) return res.json({ results: [] });
+
+    const key = q.toLowerCase();
+    if (findCache.has(key)) return res.json({ results: findCache.get(key) });
+
+    const url = `https://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&s=${encodeURIComponent(q)}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const results =
+      data.Response === 'True'
+        ? data.Search.filter((r) => r.Type === 'movie' || r.Type === 'series').slice(0, 8)
+        : [];
+
+    findCache.set(key, results);
+    res.json({ results });
+  } catch (error) {
+    console.error('OMDb Find Error:', error.message);
+    res.status(500).json({ error: 'Failed to search movies' });
+  }
+});
+
+// ---------- Full details by IMDb ID (used when a suggestion is clicked) ----------
+const detailsCache = new Map();
+
+app.get('/api/omdb/details', async (req, res) => {
+  try {
+    const { id } = req.query;
+    if (!id) return res.status(400).json({ error: 'id is required' });
+
+    if (detailsCache.has(id)) return res.json(detailsCache.get(id));
+
+    const url = `https://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&i=${encodeURIComponent(id)}&plot=short`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.Response === 'True') detailsCache.set(id, data);
+    res.json(data);
+  } catch (error) {
+    console.error('OMDb Details Error:', error.message);
+    res.status(500).json({ error: 'Failed to fetch movie details' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
