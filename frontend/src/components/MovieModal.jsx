@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { addToWatchlist, removeFromWatchlist, getWatchlist } from "../firebase/watchlistService";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-function MovieModal({ movie, onClose, onSelectMovie }) {
+function MovieModal({ movie, onClose, onSelectMovie, autoPlay }) {
     const [trailerId, setTrailerId] = useState(null);
     const [loadingTrailer, setLoadingTrailer] = useState(false);
     const [showTrailer, setShowTrailer] = useState(false);
@@ -33,6 +33,7 @@ function MovieModal({ movie, onClose, onSelectMovie }) {
                     params: { title: movie.Title },
                 });
                 setTrailerId(data.videoId);
+                if (autoPlay && data.videoId) setShowTrailer(true);
             } catch (error) {
                 console.error("Trailer fetch error:", error.message);
             } finally {
