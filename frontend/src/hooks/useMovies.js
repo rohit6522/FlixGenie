@@ -8,18 +8,23 @@ export const useMovies = (titles) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const { data } = await axios.post(`${BACKEND_URL}/api/omdb/bulk`, { titles });
-        setMovies(data.results || []);
-      } catch (error) {
-        console.error("Error fetching movies:", error.message);
-      } finally {
-        setLoading(false);
-      }
+    let cancelled = false;
+    setLoading(true);
+
+    axios
+      .post(`${BACKEND_URL}/api/omdb/bulk`, { titles })
+      .then(({ data }) => {
+        if (!cancelled) setMovies(data.results || []);
+      })
+      .catch((error) => console.error("Error fetching movies:", error.message))
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
     };
-    fetchMovies();
   }, [titles]);
 
   return { movies, loading };
-};  
+};

@@ -22,6 +22,10 @@ const openai = new OpenAI({
   baseURL: "https://api.groq.com/openai/v1",
 });
 
+
+// In-memory cache: each title is fetched from OMDb only once per server run
+const omdbCache = new Map();
+
 // Health check
 app.get('/', (req, res) => {
   res.json({ message: 'FlixGenie backend is running' });
@@ -105,7 +109,24 @@ app.get('/api/omdb/search', async (req, res) => {
   }
 });
 
-// OMDb: fetch multiple movies by a list of titles (for "Popular", "Top Rated" rows)
+
+
+const fetchOmdbTitle = async (title) => {
+  const key = String(title).toLowerCase();
+  if (omdbCache.has(key)) return omdbCache.get(key);
+
+  const url = `https://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&t=${encodeURIComponent(title)}`;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  if (data.Response === 'True') {
+    omdbCache.set(key, data);
+    return data;
+  }
+  return null;
+};
+
+// OMDb: fetch multiple movies by a list of titles
 app.post('/api/omdb/bulk', async (req, res) => {
   try {
     const { titles } = req.body;
@@ -113,15 +134,7 @@ app.post('/api/omdb/bulk', async (req, res) => {
       return res.status(400).json({ error: 'titles array is required' });
     }
 
-    const results = await Promise.all(
-      titles.map(async (title) => {
-        const url = `https://www.omdbapi.com/?apikey=${process.env.OMDB_API_KEY}&t=${encodeURIComponent(title)}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        return data.Response === 'True' ? data : null;
-      })
-    );
-
+    const results = await Promise.all(titles.map(fetchOmdbTitle));
     res.json({ results: results.filter(Boolean) });
   } catch (error) {
     console.error('OMDb Bulk Error:', error.message);
@@ -164,6 +177,8 @@ app.get('/api/archive/movies', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch archive movies' });
   }
 });
+
+
 // YouTube: search trailer by movie title
 app.get('/api/youtube/trailer', async (req, res) => {
   try {
