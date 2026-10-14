@@ -6,11 +6,9 @@ import Navbar from "../components/Navbar";
 import MovieList from "../components/MovieList";
 import MovieCard from "../components/MovieCard";
 import GptSearch from "../components/GptSearch";
-import GptResult from "../components/GptResult";
 import HeroBanner from "../components/HeroBanner";
 import Top10Row from "../components/Top10Row";
 import MovieModal from "../components/MovieModal";
-import SearchBar from "../components/SearchBar";
 import CategoryTabs from "../components/CategoryTabs";
 import SkeletonRow from "../components/SkeletonRow";
 import SkeletonHero from "../components/SkeletonHero";
@@ -71,7 +69,6 @@ function GridSection({ movies, loading, onSelect }) {
 /* ---------- Views ---------- */
 function HomeView({ onSelect, onPlay }) {
   const { t } = useTranslation();
-  const [gptResult, setGptResult] = useState("");
   const [featured, setFeatured] = useState(null);
   const [activeCategory, setActiveCategory] = useState("hollywood");
 
@@ -137,14 +134,12 @@ function HomeView({ onSelect, onPlay }) {
         </>
       )}
 
-      <div id="search-section" className="px-8 scroll-mt-24">
-        <SearchBar onSelectMovie={onSelect} />
-        <GptSearch onResult={setGptResult} />
-        <GptResult result={gptResult} />
-      </div>
-
       {!isLoading && (
         <>
+          <div id="ai-section" className="px-8 mt-4 scroll-mt-24">
+            <GptSearch />
+          </div>
+
           <CategoryTabs
             categories={homeCategories}
             activeCategory={activeCategory}
