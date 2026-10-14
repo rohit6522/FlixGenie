@@ -78,6 +78,7 @@ function HomeView({ onSelect, onPlay }) {
   const { movies: trending, loading: l1 } = useMovies(trendingTitles);
   const { movies: popular, loading: l2 } = useMovies(popularTitles);
   const { movies: topRated, loading: l3 } = useMovies(topRatedTitles);
+  const { movies: tvShows } = useMovies(webSeriesTitles);
 
   const activeCat = homeCategories.find((c) => c.key === activeCategory);
   const { movies: categoryMovies, loading: lc } = useMovies(activeCat.titles);
@@ -90,7 +91,7 @@ function HomeView({ onSelect, onPlay }) {
     }
   }, [trending, featured]);
 
-  const top10 = useMemo(() => {
+  const top10Movies = useMemo(() => {
     const seen = new Set();
     return [...trending, ...popular]
       .filter((m) => {
@@ -100,6 +101,11 @@ function HomeView({ onSelect, onPlay }) {
       })
       .slice(0, 10);
   }, [trending, popular]);
+
+  const top10Tv = useMemo(
+    () => tvShows.filter((m) => m.Poster && m.Poster !== "N/A").slice(0, 10),
+    [tvShows]
+  );
 
   return (
     <>
@@ -116,7 +122,17 @@ function HomeView({ onSelect, onPlay }) {
           <HeroBanner movie={featured} onPlay={onPlay} />
           <div className="-mt-28 md:-mt-36 relative z-10">
             <MovieList title={t("trendingNow")} movies={trending} onMovieClick={onSelect} />
-            <Top10Row title="Top 10 on FlixGenie Today" movies={top10} onMovieClick={onSelect} />
+            <Top10Row
+              title="Top 10 Movies on FlixGenie Today"
+              movies={top10Movies}
+              onMovieClick={onSelect}
+            />
+            <MovieList
+              title="Top 10 TV Shows"
+              movies={top10Tv}
+              onMovieClick={onSelect}
+              ranked
+            />
           </div>
         </>
       )}
