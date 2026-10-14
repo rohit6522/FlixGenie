@@ -1,8 +1,7 @@
 function SkeletonCard() {
   return (
-    <div className="min-w-[160px] w-40 mr-4">
-      <div className="shimmer rounded-lg w-full h-56"></div>
-      <div className="shimmer h-3 w-3/4 mt-2 rounded"></div>
+    <div className="flex-shrink-0 w-[140px] sm:w-[160px] md:w-[185px] mr-3">
+      <div className="shimmer aspect-[2/3] rounded-md w-full"></div>
     </div>
   );
 }
