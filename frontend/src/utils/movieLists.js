@@ -63,6 +63,14 @@ export const webSeriesTitles = [
   "Mirzapur",
   "The Family Man",
   "Dark",
+  "Game of Thrones",
+  "Peaky Blinders",
+  "The Last of Us",
+  "Squid Game",
+  "Narcos",
+  "Better Call Saul",
+  "Panchayat",
+  "Scam 1992",
 ];
 
 export const bollywoodTitles = [
