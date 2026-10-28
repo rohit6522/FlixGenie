@@ -1,19 +1,37 @@
 @import "tailwindcss";
 
 @layer utilities {
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
+  /* Thin sleek scrollbar for custom areas */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: rgba(15, 15, 20, 0.6);
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(229, 9, 20, 0.6);
+  }
+
+  /* Shimmer Loading Animation */
   .shimmer {
     position: relative;
     overflow: hidden;
-    background-color: #1f2937;
+    background-color: #121218;
   }
 
   .shimmer::after {
@@ -26,10 +44,10 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.06) 50%,
       transparent 100%
     );
-    animation: shimmer 1.5s infinite;
+    animation: shimmer 1.6s infinite ease-in-out;
   }
 
   @keyframes shimmer {
@@ -40,4 +58,40 @@
       transform: translateX(100%);
     }
   }
+
+  /* Glassmorphism helpers */
+  .glass-card {
+    background: rgba(18, 18, 24, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-panel {
+    background: rgba(10, 10, 14, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Red glow accents */
+  .glow-red {
+    box-shadow: 0 0 25px -5px rgba(229, 9, 20, 0.35);
+  }
+
+  .glow-red-lg {
+    box-shadow: 0 0 40px -8px rgba(229, 9, 20, 0.5);
+  }
+}
+
+/* Custom base typography smoothing */
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: #f3f4f6;
+  background-color: #08080c;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-heading {
+  font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
 }

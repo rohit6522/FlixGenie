@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { Film, Tv, Gift, Sparkles } from "lucide-react";
 import Navbar from "../components/Navbar";
 import MovieList from "../components/MovieList";
 import MovieCard from "../components/MovieCard";
@@ -43,11 +44,11 @@ const homeCategories = [
   { key: "webseries", label: "📺 Web Series", titles: webSeriesTitles },
 ];
 
-/* ---------- Reusable grid ---------- */
+/* ---------- Modern Responsive Grid ---------- */
 function GridSection({ movies, loading, onSelect }) {
   if (loading) {
     return (
-      <div className="flex flex-wrap gap-y-6 px-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 px-6 md:px-12 pb-16">
         {Array.from({ length: 12 }).map((_, i) => (
           <SkeletonCard key={i} />
         ))}
@@ -55,12 +56,19 @@ function GridSection({ movies, loading, onSelect }) {
     );
   }
   if (!movies.length) {
-    return <p className="px-8 text-gray-400">No titles found.</p>;
+    return (
+      <div className="px-6 md:px-12 py-16 text-center text-gray-400">
+        <Film className="w-10 h-10 mx-auto text-gray-600 mb-2" />
+        <p className="text-base font-semibold">No titles found.</p>
+      </div>
+    );
   }
   return (
-    <div className="flex flex-wrap gap-y-6 px-8 pb-10">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 px-6 md:px-12 pb-16">
       {movies.map((movie) => (
-        <MovieCard key={movie.imdbID} movie={movie} onClick={onSelect} />
+        <div key={movie.imdbID} className="flex justify-center">
+          <MovieCard movie={movie} onClick={onSelect} />
+        </div>
       ))}
     </div>
   );
@@ -77,7 +85,7 @@ function HomeView({ onSelect, onPlay }) {
   const { movies: topRated, loading: l3 } = useMovies(topRatedTitles);
   const { movies: tvShows } = useMovies(webSeriesTitles);
 
-  const activeCat = homeCategories.find((c) => c.key === activeCategory);
+  const activeCat = homeCategories.find((c) => c.key === activeCategory) || homeCategories[0];
   const { movies: categoryMovies, loading: lc } = useMovies(activeCat.titles);
 
   const isLoading = l1 || l2 || l3;
@@ -116,16 +124,16 @@ function HomeView({ onSelect, onPlay }) {
         </>
       ) : (
         <>
-          <HeroBanner movie={featured} onPlay={onPlay} />
-          <div className="-mt-28 md:-mt-36 relative z-10">
-            <MovieList title={t("trendingNow")} movies={trending} onMovieClick={onSelect} />
+          <HeroBanner movie={featured} onPlay={onPlay} onSelect={onSelect} />
+          <div className="-mt-28 md:-mt-36 relative z-20">
+            <MovieList title={t("trendingNow", "Trending Now")} movies={trending} onMovieClick={onSelect} />
             <Top10Row
               title="Top 10 Movies on FlixGenie Today"
               movies={top10Movies}
               onMovieClick={onSelect}
             />
             <MovieList
-              title="Top 10 TV Shows"
+              title="Top 10 TV Shows Today"
               movies={top10Tv}
               onMovieClick={onSelect}
               ranked
@@ -136,22 +144,25 @@ function HomeView({ onSelect, onPlay }) {
 
       {!isLoading && (
         <>
-          <div id="ai-section" className="px-8 mt-4 scroll-mt-24">
+          <div id="ai-section" className="px-6 md:px-12 mt-4 scroll-mt-24">
             <GptSearch />
           </div>
 
-          <CategoryTabs
-            categories={homeCategories}
-            activeCategory={activeCategory}
-            onSelect={setActiveCategory}
-          />
-          {lc ? (
-            <SkeletonRow />
-          ) : (
-            <MovieList title={activeCat.label} movies={categoryMovies} onMovieClick={onSelect} />
-          )}
-          <MovieList title={t("popular")} movies={popular} onMovieClick={onSelect} />
-          <MovieList title={t("topRated")} movies={topRated} onMovieClick={onSelect} />
+          <div className="mb-2">
+            <CategoryTabs
+              categories={homeCategories}
+              activeCategory={activeCategory}
+              onSelect={setActiveCategory}
+            />
+            {lc ? (
+              <SkeletonRow />
+            ) : (
+              <MovieList title={activeCat.label} movies={categoryMovies} onMovieClick={onSelect} />
+            )}
+          </div>
+
+          <MovieList title={t("popular", "Popular on FlixGenie")} movies={popular} onMovieClick={onSelect} />
+          <MovieList title={t("topRated", "Critically Acclaimed & Top Rated")} movies={topRated} onMovieClick={onSelect} />
         </>
       )}
     </>
@@ -160,12 +171,22 @@ function HomeView({ onSelect, onPlay }) {
 
 function MoviesView({ onSelect }) {
   const [active, setActive] = useState("hollywood");
-  const cat = movieCategories.find((c) => c.key === active);
+  const cat = movieCategories.find((c) => c.key === active) || movieCategories[0];
   const { movies, loading } = useMovies(cat.titles);
 
   return (
-    <div className="pt-24">
-      <h1 className="px-8 text-3xl md:text-4xl font-bold mb-4">Movies</h1>
+    <div className="pt-28">
+      <div className="px-6 md:px-12 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-500">
+            <Film className="w-5 h-5" />
+          </div>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">Movies</h1>
+            <p className="text-gray-400 text-xs md:text-sm mt-0.5">Explore curated blockbusters by region & genre</p>
+          </div>
+        </div>
+      </div>
       <CategoryTabs categories={movieCategories} activeCategory={active} onSelect={setActive} />
       <GridSection movies={movies} loading={loading} onSelect={onSelect} />
     </div>
@@ -176,8 +197,18 @@ function TvView({ onSelect }) {
   const { movies, loading } = useMovies(webSeriesTitles);
 
   return (
-    <div className="pt-24">
-      <h1 className="px-8 text-3xl md:text-4xl font-bold mb-6">TV Shows</h1>
+    <div className="pt-28">
+      <div className="px-6 md:px-12 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400">
+            <Tv className="w-5 h-5" />
+          </div>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">TV Shows & Series</h1>
+            <p className="text-gray-400 text-xs md:text-sm mt-0.5">Binge-worthy drama, thriller, and sci-fi series</p>
+          </div>
+        </div>
+      </div>
       <GridSection movies={movies} loading={loading} onSelect={onSelect} />
     </div>
   );
@@ -187,17 +218,26 @@ function ClassicsView({ onSelect }) {
   const { movies, loading } = usePublicDomainMovies();
 
   return (
-    <div className="pt-24">
-      <h1 className="px-8 text-3xl md:text-4xl font-bold mb-1">Free Classics</h1>
-      <p className="px-8 text-gray-400 text-sm mb-6">
-        Public domain films, free and legal to watch in full.
-      </p>
+    <div className="pt-28">
+      <div className="px-6 md:px-12 mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+            <Gift className="w-5 h-5" />
+          </div>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight">Free Public Domain Classics</h1>
+            <p className="text-gray-400 text-xs md:text-sm mt-0.5">
+              100% legal, complete feature films preserved by the Internet Archive
+            </p>
+          </div>
+        </div>
+      </div>
       <GridSection movies={movies} loading={loading} onSelect={onSelect} />
     </div>
   );
 }
 
-/* ---------- Page ---------- */
+/* ---------- Main Browse Page ---------- */
 function Browse() {
   const [params] = useSearchParams();
   const view = params.get("view") || "home";
@@ -219,14 +259,14 @@ function Browse() {
   }, [view]);
 
   return (
-    <div className="bg-[#0a0a0a] min-h-screen text-white">
+    <div className="bg-[#08080c] min-h-screen text-white select-none">
       <Navbar />
 
       <motion.div
         key={view}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.35 }}
       >
         {view === "movies" && <MoviesView onSelect={openMovie} />}
         {view === "tv" && <TvView onSelect={openMovie} />}
@@ -234,11 +274,21 @@ function Browse() {
         {view === "home" && <HomeView onSelect={openMovie} onPlay={playMovie} />}
       </motion.div>
 
-      <footer className="text-center text-gray-500 text-xs mt-10 px-8 pb-6 border-t border-gray-900 pt-6">
-        <p>Built with React, Firebase & Groq AI</p>
-        <p className="mt-1">© 2026 FlixGenie, a student project for educational purposes</p>
+      {/* Modern Footer */}
+      <footer className="mt-20 border-t border-white/[0.08] bg-[#060609] py-12 px-6 md:px-12 text-center text-xs text-gray-500 space-y-3">
+        <div className="flex items-center justify-center gap-2 text-white font-bold text-sm tracking-tight">
+          <Sparkles className="w-4 h-4 text-red-500" />
+          <span>FlixGenie Cinematic Universe</span>
+        </div>
+        <p className="max-w-md mx-auto text-gray-400">
+          Powered by React, Tailwind CSS, Firebase Auth, Groq AI (LLaMA 3.3), and OMDb API.
+        </p>
+        <p className="text-gray-600">
+          © 2026 FlixGenie. Public domain films sourced ethically via Internet Archive.
+        </p>
       </footer>
 
+      {/* Global Movie Details & Player Modal */}
       <MovieModal
         movie={selectedMovie}
         autoPlay={autoPlay}

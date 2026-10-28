@@ -2,6 +2,16 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import {
+  Play,
+  Plus,
+  Check,
+  Info,
+  Star,
+  Clock,
+  Sparkles,
+  Film,
+} from "lucide-react";
+import {
   addToWatchlist,
   removeFromWatchlist,
   getWatchlist,
@@ -9,9 +19,9 @@ import {
 
 // Ask Amazon's image service for a larger version of the poster
 const hiRes = (url) =>
-  url && url !== "N/A" ? url.replace(/_V1_.*\.jpg$/, "_V1_SX1000.jpg") : url;
+  url && url !== "N/A" ? url.replace(/_V1_.*\.jpg$/, "_V1_SX1200.jpg") : url;
 
-function HeroBanner({ movie, onPlay }) {
+function HeroBanner({ movie, onPlay, onSelect }) {
   const user = useSelector((store) => store.user);
   const [inList, setInList] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -62,82 +72,171 @@ function HeroBanner({ movie, onPlay }) {
       : null;
 
   const genres = movie.Genre
-    ? movie.Genre.split(",").slice(0, 3).map((g) => g.trim()).join("  •  ")
-    : "";
+    ? movie.Genre.split(",").slice(0, 3).map((g) => g.trim())
+    : [];
 
   return (
-    <div className="relative w-full h-[85vh] min-h-[560px] overflow-hidden">
-      {/* Blurred backdrop */}
+    <div className="relative w-full h-[88vh] min-h-[600px] max-h-[920px] overflow-hidden select-none bg-[#08080c]">
+      {/* Blurred atmospheric backdrop image */}
       <img
         src={movie.Poster}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover object-top blur-2xl scale-125 opacity-50"
+        className="absolute inset-0 w-full h-full object-cover object-top blur-3xl scale-125 opacity-40 brightness-75 transition-opacity duration-1000"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/50" />
 
-      {/* Content */}
-      <div className="relative z-10 h-full max-w-[1600px] mx-auto px-8 pt-16 pb-32 flex items-center justify-between gap-10">
+      {/* Layered cinematic vignettes */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#08080c] via-[#08080c]/85 to-transparent z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-[#08080c]/30 to-black/70 z-[1]" />
+      <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#08080c] to-transparent z-[2]" />
+
+      {/* Main Content Area */}
+      <div className="relative z-10 h-full max-w-[1680px] mx-auto px-6 md:px-12 pt-20 pb-36 flex items-center justify-between gap-12">
         <motion.div
           key={movie.imdbID + "-text"}
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-2xl"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl lg:max-w-3xl"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight leading-none mb-5 drop-shadow-2xl">
+          {/* Top highlight pill */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/20 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-wider shadow-sm">
+              <Sparkles className="w-3.5 h-3.5" />
+              Featured Premiere
+            </span>
+            {movie.archiveId && (
+              <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+                100% Free Full Movie
+              </span>
+            )}
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none text-white mb-5 drop-shadow-[0_4px_25px_rgba(0,0,0,0.9)]">
             {movie.Title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-3 text-sm mb-4">
-            {match && <span className="text-green-400 font-bold">{match}% Match</span>}
-            <span className="text-gray-300">{movie.Year}</span>
+          {/* Meta Information Badges */}
+          <div className="flex flex-wrap items-center gap-2.5 text-xs sm:text-sm mb-4">
+            {match && (
+              <span className="flex items-center gap-1 bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                <Star className="w-3 h-3 fill-emerald-400" />
+                {match}% Match
+              </span>
+            )}
+            {movie.imdbRating && movie.imdbRating !== "N/A" && (
+              <span className="text-yellow-400 font-bold flex items-center gap-1 bg-yellow-950/40 border border-yellow-500/30 px-2 py-0.5 rounded-full">
+                ★ {movie.imdbRating}
+              </span>
+            )}
+            <span className="text-gray-300 font-medium px-2 py-0.5 bg-white/5 rounded-md border border-white/10">
+              {movie.Year}
+            </span>
             {movie.Rated && movie.Rated !== "N/A" && (
-              <span className="border border-gray-400 text-gray-300 px-1.5 text-xs">
+              <span className="border border-white/20 text-gray-300 px-2 py-0.5 rounded-md text-xs font-semibold uppercase">
                 {movie.Rated}
               </span>
             )}
             {movie.Runtime && movie.Runtime !== "N/A" && (
-              <span className="text-gray-300">{movie.Runtime}</span>
+              <span className="text-gray-300 flex items-center gap-1 text-xs">
+                <Clock className="w-3.5 h-3.5 text-gray-400" />
+                {movie.Runtime}
+              </span>
             )}
+            <span className="px-1.5 py-0.5 bg-red-950/60 text-red-300 text-[10px] font-bold tracking-wider rounded border border-red-800/40 uppercase">
+              Ultra HD
+            </span>
           </div>
 
-          {genres && <p className="text-gray-400 text-sm mb-3">{genres}</p>}
+          {/* Genres */}
+          {genres.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {genres.map((g) => (
+                <span
+                  key={g}
+                  className="text-xs text-gray-400 bg-white/[0.04] px-2.5 py-0.5 rounded-full border border-white/[0.06]"
+                >
+                  {g}
+                </span>
+              ))}
+            </div>
+          )}
 
-          <p className="text-gray-200 text-sm md:text-base line-clamp-3 mb-6 max-w-xl">
+          {/* Synopsis */}
+          <p className="text-gray-300 text-sm md:text-base leading-relaxed line-clamp-3 mb-8 max-w-2xl text-shadow">
             {movie.Plot}
           </p>
 
-          <div className="flex flex-wrap gap-3">
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center gap-3.5">
             <button
               onClick={() => onPlay && onPlay(movie)}
-              className="bg-[#e50914] hover:bg-[#c11119] text-white px-8 py-3 rounded font-semibold flex items-center gap-2 transition-colors"
+              className="bg-red-600 hover:bg-red-500 active:scale-95 text-white px-7 py-3.5 rounded-xl font-bold flex items-center gap-2.5 transition-all shadow-xl shadow-red-600/30 group"
             >
-              ▶ Play
+              <Play className="w-5 h-5 fill-white group-hover:scale-110 transition-transform" />
+              <span>Watch Trailer</span>
             </button>
+
             <button
               onClick={toggleList}
               disabled={busy}
-              className="bg-white/20 hover:bg-white/30 backdrop-blur text-white px-6 py-3 rounded font-semibold flex items-center gap-2 transition-colors disabled:opacity-60"
+              className={`px-6 py-3.5 rounded-xl font-semibold flex items-center gap-2 transition-all border backdrop-blur-md active:scale-95 disabled:opacity-60 ${
+                inList
+                  ? "bg-white/20 border-white/40 text-white hover:bg-white/30"
+                  : "bg-white/10 hover:bg-white/15 border-white/15 text-white hover:border-white/30"
+              }`}
             >
-              {inList ? "✓ My List" : "+ My List"}
+              {inList ? (
+                <>
+                  <Check className="w-5 h-5 text-emerald-400" />
+                  <span>In Watchlist</span>
+                </>
+              ) : (
+                <>
+                  <Plus className="w-5 h-5" />
+                  <span>Add to List</span>
+                </>
+              )}
             </button>
+
+            {onSelect && (
+              <button
+                onClick={() => onSelect(movie)}
+                className="px-5 py-3.5 rounded-xl font-semibold flex items-center gap-2 bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-gray-200 hover:text-white transition-all backdrop-blur-md active:scale-95"
+              >
+                <Info className="w-5 h-5 text-gray-300" />
+                <span>More Info</span>
+              </button>
+            )}
           </div>
         </motion.div>
 
-        {/* Sharp poster on the right (desktop) */}
-        <motion.img
+        {/* Sharp High-Res Poster Showcase on Desktop */}
+        <motion.div
           key={movie.imdbID + "-poster"}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          src={hiRes(movie.Poster)}
-          alt={movie.Title}
-          onError={(e) => {
-            if (e.target.src !== movie.Poster) e.target.src = movie.Poster;
-          }}
-          className="hidden md:block h-[60%] max-h-[480px] rounded-md shadow-2xl shadow-black/80 lg:mr-16"
-        />
+          initial={{ opacity: 0, scale: 0.92, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="hidden md:block flex-shrink-0 relative group"
+        >
+          <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-red-600/30 to-purple-600/30 blur-xl opacity-50 group-hover:opacity-80 transition duration-500" />
+          <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl shadow-black">
+            <img
+              src={hiRes(movie.Poster)}
+              alt={movie.Title}
+              onError={(e) => {
+                if (e.target.src !== movie.Poster) e.target.src = movie.Poster;
+              }}
+              className="h-[360px] lg:h-[460px] w-auto object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span className="text-xs font-semibold text-white flex items-center gap-1.5">
+                <Film className="w-4 h-4 text-red-500" />
+                Click More Info for details & cast
+              </span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
