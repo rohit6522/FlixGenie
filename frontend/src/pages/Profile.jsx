@@ -62,7 +62,7 @@ function Profile() {
   const initial = (user?.displayName || user?.email || "?")[0].toUpperCase();
 
   return (
-    <div className="min-h-screen bg-[#08080c] text-white select-none">
+    <div className="min-h-screen bg-[#141414] text-white select-none">
       <Navbar />
 
       <motion.div
@@ -116,10 +116,10 @@ function Profile() {
         </div>
 
         {/* Profile Card & Form */}
-        <div className="rounded-3xl bg-[#0f0f16] border border-white/10 p-6 md:p-8 space-y-8 shadow-2xl">
+        <div className="rounded-3xl bg-[#1c1c1c] border border-neutral-800 p-6 md:p-8 space-y-8 shadow-2xl">
           {/* Avatar and Email header */}
-          <div className="flex flex-col sm:flex-row items-center gap-6 pb-8 border-b border-white/10">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-red-600 to-rose-600 flex items-center justify-center text-4xl font-black text-white shadow-xl shadow-red-950 ring-4 ring-white/10 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row items-center gap-6 pb-8 border-b border-neutral-800">
+            <div className="w-20 h-20 rounded-2xl bg-red-600 flex items-center justify-center text-4xl font-black text-white shadow-lg ring-4 ring-white/10 flex-shrink-0">
               {initial}
             </div>
             <div className="text-center sm:text-left">

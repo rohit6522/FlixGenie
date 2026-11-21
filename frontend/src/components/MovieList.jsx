@@ -7,8 +7,6 @@ function MovieList({ title, movies, onMovieClick, ranked = false }) {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  if (!movies || movies.length === 0) return null;
-
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
@@ -20,6 +18,8 @@ function MovieList({ title, movies, onMovieClick, ranked = false }) {
   useEffect(() => {
     checkScroll();
   }, [movies]);
+
+  if (!movies || movies.length === 0) return null;
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -37,7 +37,7 @@ function MovieList({ title, movies, onMovieClick, ranked = false }) {
       {/* Row Header */}
       <div className="flex items-center justify-between mb-3.5">
         <div className="flex items-center gap-2.5">
-          <span className="w-1.5 h-5 bg-gradient-to-b from-red-500 to-rose-600 rounded-full" />
+          <span className="w-1.5 h-5 bg-red-600 rounded-full" />
           <h2 className="text-white text-lg md:text-xl font-bold tracking-tight">
             {title}
           </h2>

@@ -1,6 +1,6 @@
 import SkeletonCard from "./SkeletonCard";
 
-function SkeletonRow({ title }) {
+function SkeletonRow() {
   return (
     <div className="px-6 md:px-12 mb-8">
       <div className="flex items-center gap-3 mb-4">

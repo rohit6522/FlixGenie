@@ -35,19 +35,16 @@ function App() {
 
   if (checkingAuth) {
     return (
-      <div className="bg-[#08080c] min-h-screen flex flex-col items-center justify-center gap-4 select-none">
-        <div className="relative">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-600 to-purple-600 flex items-center justify-center text-white shadow-2xl shadow-red-600/40 animate-pulse">
-            <Sparkles className="w-8 h-8" />
-          </div>
-          <div className="absolute -inset-2 rounded-3xl bg-red-600/20 blur-xl animate-ping opacity-30" />
+      <div className="bg-[#141414] min-h-screen flex flex-col items-center justify-center gap-4 select-none">
+        <div className="w-14 h-14 rounded-2xl bg-[#e50914] flex items-center justify-center text-white shadow-lg">
+          <Sparkles className="w-7 h-7" />
         </div>
         <div className="text-center">
-          <span className="text-2xl font-black italic tracking-tight bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text text-transparent">
+          <span className="text-2xl font-black italic tracking-tight text-[#e50914]">
             FLIXGENIE
           </span>
-          <div className="w-24 h-1 bg-white/10 rounded-full mx-auto mt-3 overflow-hidden">
-            <div className="w-full h-full bg-red-600 rounded-full animate-[shimmer_1.5s_infinite]" />
+          <div className="w-24 h-1 bg-neutral-800 rounded-full mx-auto mt-3 overflow-hidden">
+            <div className="w-1/2 h-full bg-[#e50914] rounded-full animate-pulse" />
           </div>
         </div>
       </div>

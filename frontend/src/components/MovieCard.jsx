@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { Play, Plus, Check, ChevronDown, Star, Sparkles, Gift } from "lucide-react";
+import { Play, Plus, Check, ChevronDown, Star, Gift } from "lucide-react";
 import {
   addToWatchlist,
   removeFromWatchlist,
@@ -96,14 +96,14 @@ function MovieCard({ movie, onClick, rank }) {
             </span>
           </div>
         ) : (
-          <div className="absolute top-2 left-2 w-6 h-6 rounded-lg bg-gradient-to-br from-red-600 to-rose-700 flex items-center justify-center text-white text-[11px] font-black shadow-md border border-white/20">
+          <div className="absolute top-2 left-2 w-6 h-6 rounded-lg bg-red-600 flex items-center justify-center text-white text-[11px] font-black shadow-md border border-white/20">
             F
           </div>
         )}
 
         {/* Top-right: FREE or HD badge */}
         {movie.archiveId ? (
-          <span className="absolute top-2 right-2 flex items-center gap-1 bg-emerald-600/90 backdrop-blur-md text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-md border border-emerald-400/30">
+          <span className="absolute top-2 right-2 flex items-center gap-1 bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-md">
             <Gift className="w-2.5 h-2.5" />
             FREE
           </span>
@@ -116,13 +116,13 @@ function MovieCard({ movie, onClick, rank }) {
 
         {/* Resting Bottom Highlight for New / Ranked Titles */}
         {(rank || isNew) && (
-          <div className="absolute inset-x-0 bottom-0 pt-8 pb-2 px-2 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex justify-center group-hover/card:opacity-0 transition-opacity">
+          <div className="absolute inset-x-0 bottom-0 py-2 px-2 bg-black/80 flex justify-center group-hover/card:opacity-0 transition-opacity">
             {rank ? (
               <span className="text-gray-300 text-[10px] font-medium tracking-wide truncate">
                 {genres[0] || "Top Rated"}
               </span>
             ) : (
-              <span className="bg-red-600/90 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+              <span className="bg-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
                 Recently Added
               </span>
             )}
@@ -130,7 +130,7 @@ function MovieCard({ movie, onClick, rank }) {
         )}
 
         {/* Cinematic Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-[#08080c]/85 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-3.5 gap-2 backdrop-blur-[2px]">
+        <div className="absolute inset-0 bg-black/90 opacity-0 group-hover/card:opacity-100 transition-opacity duration-200 flex flex-col justify-end p-3.5 gap-2">
           {/* Action Button Row */}
           <div className="flex items-center gap-2">
             <button

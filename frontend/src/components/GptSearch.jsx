@@ -82,16 +82,12 @@ function GptSearch() {
   };
 
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-red-500/20 bg-gradient-to-br from-[#1a070c] via-[#0d0710] to-[#08080c] p-6 md:p-10 mb-12 shadow-2xl shadow-red-950/30">
-      {/* Decorative ambient flares */}
-      <div className="pointer-events-none absolute -top-32 -right-32 w-96 h-96 rounded-full bg-red-600/15 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-purple-600/15 blur-[120px]" />
-
+    <section className="relative overflow-hidden rounded-3xl border border-neutral-800 bg-[#181818] p-6 md:p-10 mb-12 shadow-xl">
       <div className="relative z-10">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-600 to-purple-600 flex items-center justify-center text-white shadow-xl shadow-red-600/30 ring-1 ring-white/20">
+            <div className="w-12 h-12 rounded-2xl bg-red-600 flex items-center justify-center text-white shadow-md">
               <Sparkles className="w-6 h-6 animate-pulse" />
             </div>
             <div>
@@ -99,7 +95,7 @@ function GptSearch() {
                 <h2 className="text-xl md:text-2xl font-black text-white tracking-tight">
                   FlixGenie AI Assistant
                 </h2>
-                <span className="bg-red-500/20 text-red-400 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full border border-red-500/30">
+                <span className="bg-neutral-800 text-neutral-300 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full border border-neutral-700">
                   Powered by LLaMA 3.3
                 </span>
               </div>
@@ -119,7 +115,7 @@ function GptSearch() {
               onChange={(e) => setQuery(e.target.value)}
               maxLength={200}
               placeholder={t("askAiPlaceholder", "e.g. Suggest me a mind-bending sci-fi movie with great plot twists")}
-              className="w-full h-14 pl-5 pr-16 rounded-2xl bg-black/60 border border-white/15 text-white text-sm md:text-base outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 backdrop-blur-md transition-all placeholder-gray-500"
+              className="w-full h-14 pl-5 pr-16 rounded-2xl bg-neutral-900 border border-neutral-700 text-white text-sm md:text-base outline-none focus:border-red-600 transition-all placeholder-gray-500"
             />
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-500 font-mono">
               {query.length}/200
@@ -129,7 +125,7 @@ function GptSearch() {
           <button
             type="submit"
             disabled={loading || !query.trim()}
-            className="h-14 px-8 rounded-2xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-red-600/25 active:scale-95 flex-shrink-0"
+            className="h-14 px-8 rounded-2xl bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm flex items-center justify-center gap-2.5 transition-all shadow-md active:scale-95 flex-shrink-0"
           >
             {loading ? (
               <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

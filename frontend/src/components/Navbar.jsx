@@ -104,8 +104,8 @@ function Navbar() {
         transition={{ duration: 0.4, ease: "easeOut" }}
         className={`fixed top-0 inset-x-0 z-40 h-20 px-4 md:px-10 flex items-center justify-between transition-all duration-300 ${
           scrolled || menuOpen || searchOpen
-            ? "bg-[#08080c]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl shadow-black/80"
-            : "bg-gradient-to-b from-black/90 via-black/50 to-transparent"
+            ? "bg-[#141414]/95 backdrop-blur-xl border-b border-neutral-800 shadow-xl"
+            : "bg-[#141414]/80 backdrop-blur-md border-b border-neutral-800/50"
         }`}
       >
         {searchOpen ? (
@@ -118,10 +118,10 @@ function Navbar() {
                 to="/browse"
                 className="group flex items-center gap-2.5 text-2xl md:text-3xl font-black italic tracking-tight select-none"
               >
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-red-500 via-red-600 to-rose-700 flex items-center justify-center text-white shadow-lg shadow-red-600/30 group-hover:scale-105 transition-transform">
+                <div className="w-9 h-9 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
                   <Sparkles className="w-5 h-5 fill-white/20" />
                 </div>
-                <span className="bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(229,9,20,0.3)]">
+                <span className="text-red-600">
                   {t("appName", "FlixGenie")}
                 </span>
               </Link>
@@ -165,9 +165,9 @@ function Navbar() {
               {/* AI Genie Shortcut */}
               <a
                 href="#ai-section"
-                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-red-950/60 to-purple-950/60 hover:from-red-900/80 hover:to-purple-900/80 border border-red-500/30 text-rose-200 text-xs font-medium transition-all shadow-sm"
+                className="hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-white text-xs font-medium transition-all shadow-sm"
               >
-                <Sparkles className="w-3.5 h-3.5 text-red-400" />
+                <Sparkles className="w-3.5 h-3.5 text-red-500" />
                 <span>AI Genie</span>
               </a>
 
@@ -206,7 +206,7 @@ function Navbar() {
                       onClick={() => setProfileOpen(!profileOpen)}
                       className="flex items-center gap-1.5 p-1 rounded-full hover:bg-white/10 transition-colors focus:outline-none"
                     >
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-red-600 to-rose-500 text-white font-bold text-xs flex items-center justify-center ring-2 ring-white/20 shadow-md">
+                      <div className="w-8 h-8 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center ring-2 ring-white/20 shadow-md">
                         {initial}
                       </div>
                       <ChevronDown className="w-3.5 h-3.5 text-gray-400 hidden sm:block" />

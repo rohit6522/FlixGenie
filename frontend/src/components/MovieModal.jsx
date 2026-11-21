@@ -133,7 +133,7 @@ function MovieModal({ movie, onClose, onSelectMovie, autoPlay }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 24 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="relative bg-[#0d0d14] border border-white/10 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto scrollbar-thin shadow-2xl shadow-black"
+          className="relative bg-[#181818] border border-neutral-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto scrollbar-thin shadow-2xl shadow-black"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Floating Button */}
@@ -169,7 +169,7 @@ function MovieModal({ movie, onClose, onSelectMovie, autoPlay }) {
                   alt={movie.Title}
                   className="w-full h-full object-cover blur-md scale-105 opacity-50"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d14] via-[#0d0d14]/40 to-black/60" />
+                <div className="absolute inset-0 bg-black/60" />
                 
                 {/* Floating Play Button on top of thumbnail */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">

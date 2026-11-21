@@ -76,18 +76,17 @@ function HeroBanner({ movie, onPlay, onSelect }) {
     : [];
 
   return (
-    <div className="relative w-full h-[88vh] min-h-[600px] max-h-[920px] overflow-hidden select-none bg-[#08080c]">
-      {/* Blurred atmospheric backdrop image */}
+    <div className="relative w-full h-[88vh] min-h-[600px] max-h-[920px] overflow-hidden select-none bg-[#141414]">
+      {/* Backdrop image */}
       <img
         src={movie.Poster}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover object-top blur-3xl scale-125 opacity-40 brightness-75 transition-opacity duration-1000"
+        className="absolute inset-0 w-full h-full object-cover object-top blur-md scale-105 opacity-35 brightness-75 transition-opacity duration-700"
       />
 
-      {/* Layered cinematic vignettes */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#08080c] via-[#08080c]/85 to-transparent z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#08080c] via-[#08080c]/30 to-black/70 z-[1]" />
-      <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#08080c] to-transparent z-[2]" />
+      {/* Static dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/60 z-[1]" />
+      <div className="absolute inset-x-0 bottom-0 h-36 bg-black/80 z-[1]" />
 
       {/* Main Content Area */}
       <div className="relative z-10 h-full max-w-[1680px] mx-auto px-6 md:px-12 pt-20 pb-36 flex items-center justify-between gap-12">
@@ -100,12 +99,12 @@ function HeroBanner({ movie, onPlay, onSelect }) {
         >
           {/* Top highlight pill */}
           <div className="flex items-center gap-2 mb-4">
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600/20 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-wider shadow-sm">
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
               Featured Premiere
             </span>
             {movie.archiveId && (
-              <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold">
+              <span className="px-2.5 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold">
                 100% Free Full Movie
               </span>
             )}
@@ -219,8 +218,7 @@ function HeroBanner({ movie, onPlay, onSelect }) {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="hidden md:block flex-shrink-0 relative group"
         >
-          <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-red-600/30 to-purple-600/30 blur-xl opacity-50 group-hover:opacity-80 transition duration-500" />
-          <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl shadow-black">
+          <div className="relative rounded-2xl overflow-hidden border border-neutral-700 shadow-2xl shadow-black">
             <img
               src={hiRes(movie.Poster)}
               alt={movie.Title}
@@ -229,7 +227,7 @@ function HeroBanner({ movie, onPlay, onSelect }) {
               }}
               className="h-[360px] lg:h-[460px] w-auto object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <div className="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
               <span className="text-xs font-semibold text-white flex items-center gap-1.5">
                 <Film className="w-4 h-4 text-red-500" />
                 Click More Info for details & cast

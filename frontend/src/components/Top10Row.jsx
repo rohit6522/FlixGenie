@@ -6,8 +6,6 @@ function Top10Row({ title, movies, onMovieClick }) {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  if (!movies || movies.length === 0) return null;
-
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
@@ -19,6 +17,8 @@ function Top10Row({ title, movies, onMovieClick }) {
   useEffect(() => {
     checkScroll();
   }, [movies]);
+
+  if (!movies || movies.length === 0) return null;
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -80,22 +80,22 @@ function Top10Row({ title, movies, onMovieClick }) {
             <span
               className="text-[130px] md:text-[220px] font-black leading-[0.78] -mr-5 md:-mr-8 select-none tracking-[-0.09em] transition-colors duration-300 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]"
               style={{
-                color: "#08080c",
-                WebkitTextStroke: "3px #404048",
+                color: "#141414",
+                WebkitTextStroke: "3px #444444",
               }}
             >
               {index + 1}
             </span>
 
             {/* Poster Card */}
-            <div className="relative w-28 md:w-44 aspect-[2/3] rounded-xl overflow-hidden bg-[#121218] border border-white/10 group-hover/topitem:border-red-500/50 shadow-xl group-hover/topitem:shadow-2xl group-hover/topitem:shadow-red-950/40 transition-all duration-300">
+            <div className="relative w-28 md:w-44 aspect-[2/3] rounded-xl overflow-hidden bg-[#181818] border border-neutral-800 group-hover/topitem:border-red-600 shadow-xl transition-all duration-300">
               <img
                 src={movie.Poster}
                 alt={movie.Title}
                 loading="lazy"
                 className="w-full h-full object-cover group-hover/topitem:scale-105 transition-transform duration-500"
               />
-              <span className="absolute top-2 left-2 bg-gradient-to-br from-red-600 to-rose-700 text-white font-black text-[10px] w-5 h-5 flex items-center justify-center rounded-md shadow">
+              <span className="absolute top-2 left-2 bg-red-600 text-white font-black text-[10px] w-5 h-5 flex items-center justify-center rounded-md shadow">
                 F
               </span>
               <span className="absolute bottom-2.5 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md uppercase tracking-wider">

@@ -259,7 +259,7 @@ function Browse() {
   }, [view]);
 
   return (
-    <div className="bg-[#08080c] min-h-screen text-white select-none">
+    <div className="bg-[#141414] min-h-screen text-white select-none">
       <Navbar />
 
       <motion.div
@@ -275,7 +275,7 @@ function Browse() {
       </motion.div>
 
       {/* Modern Footer */}
-      <footer className="mt-20 border-t border-white/[0.08] bg-[#060609] py-12 px-6 md:px-12 text-center text-xs text-gray-500 space-y-3">
+      <footer className="mt-20 border-t border-neutral-800 bg-[#0f0f0f] py-12 px-6 md:px-12 text-center text-xs text-gray-500 space-y-3">
         <div className="flex items-center justify-center gap-2 text-white font-bold text-sm tracking-tight">
           <Sparkles className="w-4 h-4 text-red-500" />
           <span>FlixGenie Cinematic Universe</span>

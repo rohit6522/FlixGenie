@@ -17,70 +17,31 @@
     height: 6px;
   }
   .scrollbar-thin::-webkit-scrollbar-track {
-    background: rgba(15, 15, 20, 0.6);
+    background: #141414;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: #2e2e2e;
     border-radius: 9999px;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: rgba(229, 9, 20, 0.6);
+    background: #e50914;
   }
 
-  /* Shimmer Loading Animation */
+  /* Static Shimmer / Skeleton Animation */
   .shimmer {
-    position: relative;
-    overflow: hidden;
-    background-color: #121218;
+    background-color: #1c1c1c;
+    animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  .shimmer::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.06) 50%,
-      transparent 100%
-    );
-    animation: shimmer 1.6s infinite ease-in-out;
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-
-  /* Glassmorphism helpers */
+  /* Clean Solid Dark Panels */
   .glass-card {
-    background: rgba(18, 18, 24, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #181818;
+    border: 1px solid #282828;
   }
 
   .glass-panel {
-    background: rgba(10, 10, 14, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Red glow accents */
-  .glow-red {
-    box-shadow: 0 0 25px -5px rgba(229, 9, 20, 0.35);
-  }
-
-  .glow-red-lg {
-    box-shadow: 0 0 40px -8px rgba(229, 9, 20, 0.5);
+    background-color: #1c1c1c;
+    border: 1px solid #2e2e2e;
   }
 }
 
@@ -88,7 +49,7 @@
 body {
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   color: #f3f4f6;
-  background-color: #08080c;
+  background-color: #141414;
   overflow-x: hidden;
 }
 

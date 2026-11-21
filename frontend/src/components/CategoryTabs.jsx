@@ -37,8 +37,8 @@ function CategoryTabs({ categories, activeCategory, onSelect }) {
               onClick={() => onSelect(cat.key)}
               className={`px-4 py-2 rounded-full text-xs md:text-sm font-semibold whitespace-nowrap transition-all duration-200 active:scale-95 flex items-center gap-1.5 ${
                 isActive
-                  ? "bg-gradient-to-r from-red-600 to-rose-600 text-white shadow-lg shadow-red-600/30 border border-red-500/50"
-                  : "bg-white/[0.04] hover:bg-white/[0.09] text-gray-300 hover:text-white border border-white/10"
+                  ? "bg-red-600 text-white shadow border border-red-600"
+                  : "bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white border border-neutral-700"
               }`}
             >
               {cat.label}

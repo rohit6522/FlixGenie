@@ -112,26 +112,21 @@ function Login() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#08080c] text-white flex flex-col justify-between overflow-hidden select-none">
-      {/* Background Cinematic Artwork & Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-red-950/20 via-black to-[#0c0812] pointer-events-none" />
-      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
-
+    <div className="relative min-h-screen bg-[#141414] text-white flex flex-col justify-between overflow-hidden select-none">
       {/* Header */}
       <header className="relative z-10 px-6 sm:px-12 py-8 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 to-rose-600 flex items-center justify-center text-white shadow-lg shadow-red-600/40">
+          <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md">
             <Sparkles className="w-5 h-5 fill-white/20" />
           </div>
-          <span className="text-2xl sm:text-3xl font-black italic tracking-tight bg-gradient-to-r from-red-500 via-rose-500 to-red-600 bg-clip-text text-transparent">
+          <span className="text-2xl sm:text-3xl font-black italic tracking-tight text-red-600">
             FLIXGENIE
           </span>
         </div>
 
         <button
           onClick={switchMode}
-          className="text-xs sm:text-sm font-semibold text-gray-300 hover:text-white px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+          className="text-xs sm:text-sm font-semibold text-gray-300 hover:text-white px-4 py-2 rounded-full bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 transition-colors"
         >
           {isSignup ? "Sign In" : "Sign Up"}
         </button>
@@ -139,7 +134,7 @@ function Login() {
 
       {/* Form Card */}
       <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-[460px] rounded-3xl bg-[#0f0f16]/90 border border-white/10 p-7 sm:p-10 shadow-2xl shadow-black backdrop-blur-2xl">
+        <div className="w-full max-w-[460px] rounded-3xl bg-[#1c1c1c] border border-neutral-800 p-7 sm:p-10 shadow-2xl">
           <AnimatePresence mode="wait">
             {step === 1 ? (
               <motion.form
@@ -216,7 +211,7 @@ function Login() {
 
                 <button
                   type="submit"
-                  className="w-full h-12 mt-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-red-950 active:scale-95"
+                  className="w-full h-12 mt-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-95"
                 >
                   <span>Continue</span>
                   <ArrowRight className="w-4 h-4" />
@@ -309,7 +304,7 @@ function Login() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-12 mt-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 disabled:opacity-50 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-red-950 active:scale-95"
+                  className="w-full h-12 mt-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-95"
                 >
                   {loading && (
                     <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

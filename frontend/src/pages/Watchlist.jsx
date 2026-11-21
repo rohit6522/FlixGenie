@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bookmark, Search, Film, Sparkles, Compass } from "lucide-react";
+import { Bookmark, Search, Film, Compass } from "lucide-react";
 import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
 import MovieModal from "../components/MovieModal";
@@ -47,7 +47,7 @@ function Watchlist() {
   }, [movies, searchFilter, activeTab]);
 
   return (
-    <div className="min-h-screen bg-[#08080c] text-white">
+    <div className="min-h-screen bg-[#141414] text-white">
       <Navbar />
 
       <motion.div
@@ -57,11 +57,11 @@ function Watchlist() {
         className="pt-28 pb-20 px-6 md:px-12 max-w-[1600px] mx-auto"
       >
         {/* Header and Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-white/[0.08] mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-neutral-800 mb-8">
           <div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-500 shadow-md">
-                <Bookmark className="w-5 h-5 fill-red-500/30" />
+              <div className="w-10 h-10 rounded-2xl bg-red-600 flex items-center justify-center text-white shadow-md">
+                <Bookmark className="w-5 h-5 fill-white/20" />
               </div>
               <h1 className="text-3xl md:text-4xl font-black tracking-tight text-white">
                 My Watchlist
