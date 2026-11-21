@@ -113,6 +113,16 @@ function Login() {
 
   return (
     <div className="relative min-h-screen bg-[#141414] text-white flex flex-col justify-between overflow-hidden select-none">
+      {/* Netflix Movie Poster Grid Backdrop */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-40 pointer-events-none scale-105"
+        style={{
+          backgroundImage: `url('https://assets.nflxext.com/ffe/siteui/vlv3/d8f11ec4-32f4-41b2-b9e8-5733e8b4e183/c9890a5a-939e-4a69-a1d2-0fb3a925ee8e/US-en-20231120-popsignuptwoweeks-perspective_alpha_website_medium.jpg')`,
+        }}
+      />
+      {/* Netflix Dark Overlay Scrim */}
+      <div className="absolute inset-0 bg-black/65 bg-gradient-to-t from-[#141414] via-black/40 to-[#141414]/90 pointer-events-none" />
+
       {/* Header */}
       <header className="relative z-10 px-6 sm:px-12 py-8 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
@@ -134,7 +144,7 @@ function Login() {
 
       {/* Form Card */}
       <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-[460px] rounded-3xl bg-[#1c1c1c] border border-neutral-800 p-7 sm:p-10 shadow-2xl">
+        <div className="w-full max-w-[450px] rounded-md bg-black/75 backdrop-blur-md border border-neutral-800 p-8 sm:p-14 shadow-2xl">
           <AnimatePresence mode="wait">
             {step === 1 ? (
               <motion.form

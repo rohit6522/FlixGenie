@@ -2,7 +2,7 @@ function SkeletonHero() {
   return (
     <div className="relative w-full h-[85vh] min-h-[560px] overflow-hidden bg-[#141414]">
       <div className="shimmer absolute inset-0 opacity-40"></div>
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-black/40 to-transparent" />
       
       <div className="relative z-10 h-full max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between">
         <div className="max-w-2xl space-y-4">

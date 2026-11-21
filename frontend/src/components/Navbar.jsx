@@ -104,8 +104,8 @@ function Navbar() {
         transition={{ duration: 0.4, ease: "easeOut" }}
         className={`fixed top-0 inset-x-0 z-40 h-20 px-4 md:px-10 flex items-center justify-between transition-all duration-300 ${
           scrolled || menuOpen || searchOpen
-            ? "bg-[#141414]/95 backdrop-blur-xl border-b border-neutral-800 shadow-xl"
-            : "bg-[#141414]/80 backdrop-blur-md border-b border-neutral-800/50"
+            ? "bg-[#141414] shadow-xl border-b border-neutral-800"
+            : "bg-gradient-to-b from-black/90 via-black/40 to-transparent"
         }`}
       >
         {searchOpen ? (

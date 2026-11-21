@@ -77,16 +77,18 @@ function HeroBanner({ movie, onPlay, onSelect }) {
 
   return (
     <div className="relative w-full h-[88vh] min-h-[600px] max-h-[920px] overflow-hidden select-none bg-[#141414]">
-      {/* Backdrop image */}
-      <img
-        src={movie.Poster}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover object-top blur-md scale-105 opacity-35 brightness-75 transition-opacity duration-700"
-      />
-
-      {/* Static dark overlay for text readability */}
-      <div className="absolute inset-0 bg-black/60 z-[1]" />
-      <div className="absolute inset-x-0 bottom-0 h-36 bg-black/80 z-[1]" />
+      {/* Netflix Hero Billboard Backdrop */}
+      <div className="absolute inset-0 overflow-hidden">
+        <img
+          src={hiRes(movie.Poster)}
+          alt={movie.Title}
+          className="w-full h-full object-cover object-[center_20%] brightness-[0.75] transition-opacity duration-1000 scale-100"
+        />
+        {/* Netflix Vignette Scrims */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/75 to-transparent z-[1]" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#141414] via-[#141414]/50 to-transparent z-[1]" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/80 to-transparent z-[1]" />
+      </div>
 
       {/* Main Content Area */}
       <div className="relative z-10 h-full max-w-[1680px] mx-auto px-6 md:px-12 pt-20 pb-36 flex items-center justify-between gap-12">
